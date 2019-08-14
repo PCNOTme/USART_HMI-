@@ -1,0 +1,218 @@
+C51 COMPILER V9.00   MAIN                                                                  08/07/2015 12:02:28 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: D:\软件安装\KEIL 4\C51\BIN\C51.EXE main.c LARGE BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <REG51.H>        
+   2          #include <intrins.h>
+   3          #include <absacc.h>
+   4          #include <stdio.h> 
+   5          #include <math.h> 
+   6          #include <string.h> 
+   7          #include "uart.h"
+   8          sfr P3M0 =0xb1;
+   9          sfr P3M1 =0xb2;
+  10          //#include "ds1302.c"
+  11          #define uchar unsigned char
+  12          #define uint  unsigned int
+  13          sbit swich=P1^3;
+  14          
+  15          uchar uart_dat[32]=0;
+  16          idata long  count_num=0;
+  17          uchar uart_num=0;
+  18          uchar endflag = 0;
+  19          uchar comm_dat[32];
+  20          uchar comm_len=0;
+  21          bit   new_en=0;
+  22          uchar ButtonFlag = 0;
+  23          /*******************测试单片机STC12LE5A60S2******************************/
+  24          /*******************晶振 33MHz*******************************************/
+  25          
+  26          
+  27          void MEMCOPY(uchar *dest,uchar *src,uint len)
+  28          {
+  29   1              while(len--)
+  30   1              {
+  31   2                      *dest++ = *src++;
+  32   2              }
+  33   1      }
+  34          
+  35          /**************************************************************************
+  36           - 功能描述：51单片机的串口初始化
+  37           - 隶属模块：STC51串口操作
+  38           - 函数属性：外部，使用户使用
+  39           - 参数说明：无
+  40           - 返回说明：无
+  41           **************************************************************************/
+  42          void UART_Init()     
+  43          {
+  44   1       PCON|=0x00; //PCON的最高位SMOD=1时波特率加倍 
+  45   1       TMOD=0x20;  //时器1为方式2 初值自动装入 产生波特率
+  46   1       TH1=0xf7;   //定时器初始为0XF7，晶振为33MHz，本函数实际产生的波特率为9600bps
+  47   1       TL1=0xf7;       //同上  f7
+  48   1       SCON=0x50;      //串口设置为方式1,REN=1,允许接收
+  49   1       TR1=1;      //启动定时器1
+  50   1       ES=1;       //使能串口接收中断，
+  51   1       EA=1;       //打开所有中断
+  52   1      }
+  53          
+  54          
+  55          void uart_get_int(void) interrupt  4//串口中断接收函数
+C51 COMPILER V9.00   MAIN                                                                  08/07/2015 12:02:28 PAGE 2   
+
+  56          {
+  57   1          uchar a=0;
+  58   1              
+  59   1              if(RI==1)
+  60   1              {          
+  61   2                      RI = 0; 
+  62   2                      a = SBUF;
+  63   2                      uart_dat[uart_num] = a;
+  64   2                      uart_num++;
+  65   2                      if(a==0xff)
+  66   2                      {
+  67   3                              endflag++;
+  68   3                              if(endflag == 3)
+  69   3                              {
+  70   4                                      comm_len = uart_num;
+  71   4                                      MEMCOPY(comm_dat,uart_dat,comm_len);
+  72   4                                      uart_num = 0;
+  73   4                                      endflag = 0;
+  74   4                              }
+  75   3                      }  
+  76   2                      else
+  77   2                      {
+  78   3                              endflag = 0;    
+  79   3                      }
+  80   2              }
+  81   1              UART_Init();
+  82   1      }
+  83          
+  84          /**************************************************************************
+  85           - 功能描述：51单片机的串口发送字节的函数
+  86           - 隶属模块：STC51串口操作
+  87           - 函数属性：外部，使用户使用
+  88           - 参数说明：mydata:要发送的一个字节
+  89           - 返回说明：无
+  90           - 注：发送一个字节，是串口发送的基础操作
+  91           **************************************************************************/
+  92          void UART_Send_Byte(unsigned char mydata)       
+  93          {
+  94   1       ES=0;
+  95   1       TI=0;
+  96   1       SBUF=mydata;
+  97   1       while(!TI);
+  98   1       TI=0;
+  99   1       ES=1;
+ 100   1      }
+ 101          
+ 102          /**************************************************************************
+ 103           - 功能描述：51单片机的串口发送字符串
+ 104           - 隶属模块：STC51串口操作
+ 105           - 函数属性：外部，使用户使用
+ 106           - 参数说明：s:指向字符串的指针
+ 107           - 返回说明：无
+ 108           **************************************************************************/
+ 109          void UART_Send_Str(char *s)
+ 110          {
+ 111   1       int i=0;
+ 112   1       while(s[i]!=0)
+ 113   1       {
+ 114   2              UART_Send_Byte(s[i]);
+ 115   2              i++;
+ 116   2       }
+ 117   1       
+C51 COMPILER V9.00   MAIN                                                                  08/07/2015 12:02:28 PAGE 3   
+
+ 118   1      }
+ 119          void UART_Send_END(void)
+ 120          {
+ 121   1               UART_Send_Byte(0xFF);
+ 122   1               UART_Send_Byte(0xFF);
+ 123   1               UART_Send_Byte(0xFF);
+ 124   1      }
+ 125          
+ 126          void delayms(int count)  // /* X1ms */
+ 127          {
+ 128   1              int i,j;
+ 129   1              for(i=0;i<count;i++)
+ 130   1                      for(j=0;j<1000;j++);
+ 131   1      }
+ 132          
+ 133          void main(void)
+ 134          {
+ 135   1       uint s=0;
+ 136   1       P3M0&= ~0X02;
+ 137   1       P3M1|=0X02;   //TX强上拉
+ 138   1       UART_Init();  //初始化串口，板上的晶振为33MHz，实际的波特率为9600bps 
+ 139   1       delayms(80);  //等待屏幕初始化,建议50ms以上
+ 140   1       UART_Send_END();//发送一次结束符，清除上电产生的串口杂波数据  
+ 141   1       UART_Send_Str("page 0");
+ 142   1       UART_Send_END(); 
+ 143   1       delayms(2000);
+ 144   1         while(1)
+ 145   1        {
+ 146   2              if(comm_len)
+ 147   2              {
+ 148   3                      switch(comm_dat[0])
+ 149   3                      {
+ 150   4                      case 0x65:              //触摸热区事件返回
+ 151   4                              if(comm_dat[1]==0)
+ 152   4                              {
+ 153   5                                      //确定页面ID为0
+ 154   5                                      if(comm_dat[2]==1)
+ 155   5                                      {
+ 156   6                                              //确定当前按下控件ID为1
+ 157   6                                              if(comm_dat[3]==0x01)
+ 158   6                                              {
+ 159   7                                                      //确定事件为按下事件
+ 160   7                                                      ButtonFlag      = ~ButtonFlag;
+ 161   7                                                      if(ButtonFlag)
+ 162   7                                                      {
+ 163   8                                                                UART_Send_Str("s0.picc=1");
+ 164   8                                                                UART_Send_END();
+ 165   8                                                                swich = 0;
+ 166   8                                                      }
+ 167   7                                                      else
+ 168   7                                                      {
+ 169   8                                                              UART_Send_Str("s0.picc=0");
+ 170   8                                                              UART_Send_END();
+ 171   8                                                              swich = 1;
+ 172   8                                                      }
+ 173   7                                              }
+ 174   6                                      }
+ 175   5                              }
+ 176   4                      break;
+ 177   4                      //请再次处理其他事件返回
+ 178   4                      default:
+ 179   4                      break;
+C51 COMPILER V9.00   MAIN                                                                  08/07/2015 12:02:28 PAGE 4   
+
+ 180   4                      }
+ 181   3                      comm_len = 0;
+ 182   3              }
+ 183   2         }
+ 184   1      
+ 185   1       
+ 186   1      
+ 187   1      }
+ 188          
+ 189          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    460    ----
+   CONSTANT SIZE    =     27    ----
+   XDATA SIZE       =     68      13
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =      4    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

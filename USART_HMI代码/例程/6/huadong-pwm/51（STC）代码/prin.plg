@@ -1,0 +1,20 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+D:\Desktop\USART HMI例程\huadong-pwm\单片机软件\51（STC）代码\开关控制.uvproj
+Project File Date:  07/22/2015
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+linking...
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_MEMCOPY?MAIN
+    CALLER1: ?C_C51STARTUP
+    CALLER2: ?PR?UART_GET_INT?MAIN
+Program Size: data=19.2 xdata=253 code=2312
+creating hex file from "prin"...
+"prin" - 0 Error(s), 1 Warning(s).

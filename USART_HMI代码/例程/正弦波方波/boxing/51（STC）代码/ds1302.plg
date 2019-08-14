@@ -1,0 +1,126 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\Desktop\51  ±÷”œ‘ æ\51¥Æø⁄≤‚ ‘.uvproj
+Project File Date:  07/11/2015
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SET?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?READTIME?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DISTIME?MAIN
+Program Size: data=27.2 xdata=135 code=3138
+creating hex file from "ds1302"...
+"ds1302" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SET?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?READTIME?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DISTIME?MAIN
+Program Size: data=27.2 xdata=135 code=2940
+creating hex file from "ds1302"...
+"ds1302" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SET?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?READTIME?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DISTIME?MAIN
+Program Size: data=27.2 xdata=135 code=2940
+creating hex file from "ds1302"...
+"ds1302" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SET?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?READTIME?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DISTIME?MAIN
+Program Size: data=27.2 xdata=135 code=2940
+creating hex file from "prin"...
+"prin" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SET?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?READTIME?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DISTIME?MAIN
+Program Size: data=27.2 xdata=138 code=2921
+creating hex file from "prin"...
+"prin" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SET?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?READTIME?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DISTIME?MAIN
+Program Size: data=27.2 xdata=138 code=2921
+creating hex file from "prin"...
+"prin" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SET?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?READTIME?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DISTIME?MAIN
+Program Size: data=27.2 xdata=135 code=3122
+creating hex file from "prin"...
+"prin" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SET?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?READTIME?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DISTIME?MAIN
+Program Size: data=27.2 xdata=135 code=3122
+creating hex file from "prin"...
+"prin" - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SET?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?READTIME?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DISTIME?MAIN
+Program Size: data=27.2 xdata=135 code=3138
+creating hex file from "prin"...
+"prin" - 0 Error(s), 3 Warning(s).
